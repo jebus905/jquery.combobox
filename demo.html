@@ -11,9 +11,29 @@
 </head>
 
 <body>
+	<fieldset>
+		<legend>Previous Form Submissions:</legend>
+		<div id="msg"></div>
+	</fieldset>
+	
 	<form method="get" action="demo.html">
+		<h2>Sample #1</h2>
+		<p>Straight combobox, no opitons (defaults)</p>
 		Select a Language: 
-		<select name="lang" id="lang">
+		<select name="lang1" id="lang1">
+			<option></option>
+			<option>English (US)</option>
+			<option>English (UK)</option>
+			<option>German</option>
+			<option>French</option>
+			<option>Russian</option>
+			<option>Spanish</option>
+		</select>
+		<br>
+		<h2>Sample #2</h2>
+		<p>Combobox, allow additions (invalidAction = "add")</p>
+		Select a Language: 
+		<select name="lang2" id="lang2">
 			<option></option>
 			<option>English (US)</option>
 			<option>English (UK)</option>
@@ -25,11 +45,40 @@
 		<br>
 		<input type="submit" value="Continue">
 	</form>
+	
 	<script type="text/javascript"><!--//--><![CDATA[//><!-- 
 		$(document).ready(function() {
-			$("input:submit").button();
-			$("#lang").combobox();
+			$("input:submit").button();		// make the submit button pretty
+			// initialize the comboboxes
+			$("#lang1").combobox();
+			$("#lang2").combobox({ invalidAction: "add" });
+			
+			var url = parseUrlString();
+			var msg = "";
+			if(typeof(url.lang1) != "undefined" && url.lang1 != "") msg += "Language #1: <i>" + url.lang1 + "</i><br>";
+			if(typeof(url.lang2) != "undefined" && url.lang2 != "") msg += "Language #2: <i>" + url.lang2 + "</i><br>";
+			$("#msg").html(msg);
 		});
-	//--><!]]></script>
+		
+		/**
+		 * 
+		**/
+		function parseUrlString() {
+			var out = {};
+			var kv = [];
+			
+			s = (window.location.href.split('?'))[1];	// we want the latter half
+			
+			if(typeof(s) != "undefined" && s.length > 0) {
+				var aTmp = s.split("&");
+				for(var i=0; i < aTmp.length; i++) {
+					kv = aTmp[i].split('=');
+					out[kv[0]] = unescape(kv[1].replace(/\+/g, " "));
+				}
+			}
+			
+			return out;
+		}
+		//--><!]]></script>
 </body>
 </html>

@@ -103,7 +103,8 @@
 			// Search for a match (case-insensitive)
 			var value = this.input.val(),
 				valueLowerCase = value.toLowerCase(),
-				valid = false;
+				valid = false,
+				option;
 			this.element.children( "option" ).each(function() {
 				if ( $( this ).text().toLowerCase() === valueLowerCase ) {
 					this.selected = valid = true;
@@ -134,7 +135,7 @@
 				case "add":
 					// Add new (non blank) value to list if it hasn't been found
 					if(value.replace(/\s/g, "") != "") {
-						var option = $("<option>")
+						option = $("<option>")
 								.html(value)
 								.text(value)
 								.val(value)
@@ -148,6 +149,11 @@
 		_destroy: function() {
 			this.wrapper.remove();
 			this.element.show();
+		},
+		
+		select: function(value) {
+			this.wrapper.children("input").val(value).change();
+			this.wrapper.parent().children("select").val(value).change();
 		},
 		
 		destroy: function() {
