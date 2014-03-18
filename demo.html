@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Demo Page: jquery.combobox</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/base/jquery-ui.css" type="text/css">
+	<script src="jquery.combobox.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="jquery.combobox.css">
+</head>
+
+<body>
+	<form method="get" action="demo.html">
+		Select a Language: 
+		<select name="lang" id="lang">
+			<option></option>
+			<option>English (US)</option>
+			<option>English (UK)</option>
+			<option>German</option>
+			<option>French</option>
+			<option>Russian</option>
+			<option>Spanish</option>
+		</select>
+		<br>
+		<input type="submit" value="Continue">
+	</form>
+	<script type="text/javascript"><!--//--><![CDATA[//><!-- 
+		$(document).ready(function() {
+			$("input:submit").button();
+			$("#lang").combobox();
+		});
+	//--><!]]></script>
+</body>
+</html>
