@@ -14,6 +14,7 @@
 			this.element.hide();
 			this._createAutocomplete();
 			this._createShowAllButton();
+			this._focusable(this.input);
 		},
 	
 		_createAutocomplete: function() {
@@ -50,7 +51,7 @@
 			var input = this.input,
 				wasOpen = false;
 		
-			$( "<a>" )
+			this.toggle = $( "<a>" )
 				.attr( "tabIndex", -1 )
 				.attr( "title", "Show All Items" )
 				.tooltip()
@@ -79,6 +80,26 @@
 				});
 		},
 	
+		_setOption: function(key, value) {
+			switch(key) {
+				case "forceUcase":
+					this.options.forceUcase = value;
+					break;
+					
+				case "invalidAction":
+					this.options.invalidAction = value;
+					break;
+				
+				case "classPrefix":
+					this.wrapper.removeClass(this.options.classPrefix + "-combobox").addClass(value + "-combobox");
+					this.input.removeClass(this.options.classPrefix + "-combobox-input").addClass(value + "-combobox-input");
+					this.toggle.removeClass(this.options.classPrefix + "-combobox-toggle").addClass(value + "-combobox-toggle");
+					this.options.classPrefix = value;
+					break;
+			}
+			this._super(key, value);
+		},
+		
 		_source: function( request, response ) {
 			var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
 			response( this.element.children( "option" ).map(function() {
@@ -152,8 +173,8 @@
 		},
 		
 		select: function(value) {
-			this.wrapper.children("input").val(value).change();
-			this.wrapper.parent().children("select").val(value).change();
+			this.input.val(value).change();
+			this.element.val(value).change();
 		},
 		
 		destroy: function() {
@@ -163,19 +184,19 @@
 		},
 		
 		disable: function() {
-			this.input.autocomplete("disable");							// disable the autocomplete element
-			this.input.prop("disabled", true);							// disable the input field
-			this.element.prop("disabled", true);						// disable the original select element
-			this.input.addClass("ui-state-disabled");					// add disabled state to input field
-			this.wrapper.find("a").addClass("ui-state-disabled");		// add disabled state to show all indicator
+			this.input.autocomplete("disable");				// disable the autocomplete element
+			this.input.prop("disabled", true);				// disable the input field
+			this.element.prop("disabled", true);			// disable the original select element
+			this.input.addClass("ui-state-disabled");		// add disabled state to input field
+			this.toggle.addClass("ui-state-disabled");		// add disabled state to show all indicator
 		},
 		
 		enable: function() {
-			this.input.autocomplete("enable");							// enable the autocomplete element
-			this.input.prop("disabled", false);							// enable the input field
-			this.element.prop("disabled", false);						// enable the original select element
-			this.input.removeClass("ui-state-disabled");				// remove disabled state from input field
-			this.wrapper.find("a").removeClass("ui-state-disabled");	// remove disabled state from show all indicator
+			this.input.autocomplete("enable");				// enable the autocomplete element
+			this.input.prop("disabled", false);				// enable the input field
+			this.element.prop("disabled", false);			// enable the original select element
+			this.input.removeClass("ui-state-disabled");	// remove disabled state from input field
+			this.toggle.removeClass("ui-state-disabled");	// remove disabled state from show all indicator
 		}
 	});
 })( jQuery );

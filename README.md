@@ -1,10 +1,12 @@
 #jQuery Combobox Widget
 
 A comobox widget based on the jQuery UI autocomplete demo
+Original code can be found [here](http://jqueryui.com/autocomplete/#combobox).
 
 ##Features
 
 * works with jQuery 1.8+
+* requires jQuery UI 1.9+
 
 ##Usage
 
@@ -55,6 +57,15 @@ Will destroy all combobox elements and restore the original select element.
 ####`select`
 
 Will force the selection of given value
-Example:
+Code example:
 
 	$("select").combobox("select", "Option 2");
+
+####`option`
+
+Get or Set options on-the-fly.
+Code example:
+
+	$("select").combobox("option", "forceUcase");			// getter
+	$("select").combobox("option", "forceUcase", true);		// setter
+
