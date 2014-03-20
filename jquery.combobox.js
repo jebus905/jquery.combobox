@@ -45,6 +45,14 @@
 		
 				autocompletechange: "_removeIfInvalid"
 			});
+			
+			// if original select is given focus() then force the input to get focus
+			this._on( this.element, {
+				focus: 	function( event, ui) {
+					this.input.focus();
+					event.preventDefault();
+				}
+			});
 		},
 	
 		_createShowAllButton: function() {
@@ -178,8 +186,7 @@
 		},
 		
 		destroy: function() {
-			this.wrapper.remove();
-			this.element.show();
+			this._destroy();
 			//$.Widget.prototype.destroy.call( this );
 		},
 		

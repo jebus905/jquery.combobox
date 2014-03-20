@@ -5,7 +5,7 @@
 .ui-combobox-toggle {
 	position: absolute;
 	top: 0;
-	bottom: -1px;
+	bottom: -0.05em;
 	margin-left: -1px;
 	padding: 0;
 	/* adjust styles for IE 6/7 */

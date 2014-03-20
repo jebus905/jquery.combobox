@@ -29,12 +29,13 @@ Available values:
 
 | invalidAction | Action Description                                        |
 | ------------- | --------------------------------------------------------- |
-| add           | New value is added to the bottom of the list.             |
-| remove        | Value is removed (cleared out) and an error is displayed. |
+| `add`         | New value is added to the bottom of the list.             |
+| `remove`      | Value is removed (cleared out) and an error is displayed. |
 
 ####`classPrefix`
 
 `classPrefix` The prefix used to apply to the classes of all elements involved. String value. Default = `ui`
+
 The classes involved include:
 * wrapper gets `prefix`-combobox
 * input box gets `prefix`-combobox-input
@@ -57,6 +58,7 @@ Will destroy all combobox elements and restore the original select element.
 ####`select`
 
 Will force the selection of given value
+
 Code example:
 
 	$("select").combobox("select", "Option 2");
@@ -64,6 +66,7 @@ Code example:
 ####`option`
 
 Get or Set options on-the-fly.
+
 Code example:
 
 	$("select").combobox("option", "forceUcase");			// getter
