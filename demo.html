@@ -53,27 +53,42 @@
 			$("#lang1").combobox();
 			$("#lang2").combobox({ invalidAction: "add" });
 			
+                        // Display any previously posted form values
 			var url = parseUrlString();
 			var msg = "";
-			if(typeof(url.lang1) != "undefined" && url.lang1 != "") msg += "Language #1: <i>" + url.lang1 + "</i><br>";
-			if(typeof(url.lang2) != "undefined" && url.lang2 != "") msg += "Language #2: <i>" + url.lang2 + "</i><br>";
+			if(typeof(url.lang1) !== "undefined" && url.lang1 !== "") msg += "Language #1: <i>" + url.lang1 + "</i><br>";
+			if(typeof(url.lang2) !== "undefined" && url.lang2 !== "") msg += "Language #2: <i>" + url.lang2 + "</i><br>";
 			$("#msg").html(msg);
 		});
 		
 		/**
-		 * 
-		**/
+		 *   parseUrlString()
+		 *   
+		 * Parses the HTTP query string into an array of key/value pairs.
+		 * This is probably a decent utility for someone out there.
+		 *   
+		 * @returns array The parsed HTTP Query string
+		 */
 		function parseUrlString() {
-			var out = {};
-			var kv = [];
+			var s = "",
+				out = {},
+				kv = [];
 			
-			s = (window.location.href.split('?'))[1];	// we want the latter half
+			s = (window.location.href.split('?'))[1];	// we want the latter half of the query string
 			
-			if(typeof(s) != "undefined" && s.length > 0) {
-				var aTmp = s.split("&");
-				for(var i=0; i < aTmp.length; i++) {
-					kv = aTmp[i].split('=');
-					out[kv[0]] = unescape(kv[1].replace(/\+/g, " "));
+			if(typeof(s) !== "undefined" && s.length > 0) {
+				s = s.split("#")[0];					// but not the hash part
+				if(s.length > 0) {
+					aTmp = s.split("&");				// split everything up into key=value strings
+					for(var i=0; i < aTmp.length; i++) {
+						kv = aTmp[i].split('=');		
+						if(typeof(kv[1]) === "undefined") {
+							kv[1] = null;				// if there wasn't a value, then substitute null
+						} else {
+							kv[1] = unescape(kv[1].replace(/\+/g, " "));	// otherwise we're going to need to unescape it and convert all the + chars to spaces
+						}
+						out[kv[0]] = kv[1];
+					}
 				}
 			}
 			
