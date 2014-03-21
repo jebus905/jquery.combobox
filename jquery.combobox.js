@@ -43,7 +43,11 @@
 					});
 				},
 		
-				autocompletechange: "_removeIfInvalid"
+				autocompletechange: "_removeIfInvalid",
+				
+				focus: function(event, ui) {
+					this._trigger("focus", event, {event: event, ui: ui})
+				}
 			});
 			
 			// if original select is given focus() then force the input to get focus
@@ -164,7 +168,7 @@
 				
 				case "add":
 					// Add new (non blank) value to list if it hasn't been found
-					if(value.replace(/\s/g, "") != "") {
+					if(value.replace(/\s/g, "") !== "") {
 						option = $("<option>")
 								.html(value)
 								.text(value)
@@ -180,7 +184,6 @@
 		_destroy: function() {
 			this.wrapper.remove();
 			this.element.show();
-			$.Widget.prototype.destroy.call( this );
 		},
 		
 		select: function(value) {
@@ -190,6 +193,7 @@
 		
 		destroy: function() {
 			this._destroy();
+			$.Widget.prototype.destroy.call( this );
 		},
 		
 		disable: function() {
