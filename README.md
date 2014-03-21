@@ -76,7 +76,7 @@ Code example:
 
 ####`itemRemoved`
 
-Fired when an the user enters invalid data into the combobox.
+Fires when an the user enters invalid data into the combobox.
 
 ####`itemAdded`
 
