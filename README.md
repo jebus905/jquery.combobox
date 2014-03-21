@@ -72,3 +72,12 @@ Code example:
 	$("select").combobox("option", "forceUcase");			// getter
 	$("select").combobox("option", "forceUcase", true);		// setter
 
+###Events
+
+####`itemRemoved`
+
+Fired when an the user enters invalid data into the combobox.
+
+####`itemAdded`
+
+Fires when a user enters data into the combobox that wasn't already listed.

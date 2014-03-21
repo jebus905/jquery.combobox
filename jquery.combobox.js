@@ -150,6 +150,7 @@
 			switch(this.options.invalidAction.toLowerCase()) {
 				case "remove":
 					// Remove invalid value
+					this._trigger("itemRemoved", event, ui);
 					this.input
 						.val( "" )
 						.attr( "title", value + " didn't match any item" )
@@ -170,6 +171,7 @@
 								.val(value)
 								.appendTo(this.element);
 						this.element.children(option).prop("selected", true).change();
+						this._trigger("itemAdded", event, ui);
 					}
 					break;
 			}
@@ -178,6 +180,7 @@
 		_destroy: function() {
 			this.wrapper.remove();
 			this.element.show();
+			$.Widget.prototype.destroy.call( this );
 		},
 		
 		select: function(value) {
@@ -187,7 +190,6 @@
 		
 		destroy: function() {
 			this._destroy();
-			//$.Widget.prototype.destroy.call( this );
 		},
 		
 		disable: function() {
