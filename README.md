@@ -76,8 +76,16 @@ Code example:
 
 ####`itemRemoved`
 
-Fires when an the user enters invalid data into the combobox.
+Fires when the user enters invalid data into the combobox.
 
 ####`itemAdded`
 
-Fires when a user enters data into the combobox that wasn't already listed.
+Fires when the user enters data into the combobox that wasn't already listed.
+
+####`open`
+
+Fires before displaying the list of options.
+
+####`focus`
+
+Fires when the input box gets focus.

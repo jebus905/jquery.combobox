@@ -46,14 +46,18 @@
 				autocompletechange: "_removeIfInvalid",
 				
 				focus: function(event, ui) {
-					this._trigger("focus", event, {event: event, ui: ui})
+					this._trigger("focus", event, ui);
+				},
+				
+				autocompleteopen: function(event, ui) {
+					this._trigger("open", event, ui);
 				}
 			});
 			
 			// if original select is given focus() then force the input to get focus
 			this._on( this.element, {
 				focus: 	function( event, ui) {
-					this.input.focus();
+					this._trigger("focus", event, ui);
 					event.preventDefault();
 				}
 			});
